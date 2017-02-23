@@ -119,6 +119,16 @@ object Stream {
   def apply[A](xs: A*): Stream[A] =
     if (xs.isEmpty) empty
     else cons(xs.head, apply(xs.tail: _*))
+
+  def constant[A](a: A): Stream[A] = {
+    val s = apply(a)
+    Stream.cons(a, s)
+  }
+
+  def from(n: Int): Stream[Int] = {
+
+  }
+
 }
 
 object Chapter5 {
