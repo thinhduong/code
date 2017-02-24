@@ -1,5 +1,9 @@
 package Chapter5
 
+///
+/// Missing functions: ex5.16 and function exists
+///
+
 sealed trait Stream[+A]{
   def headOption: Option[A] = this match {
     case Empty => None
@@ -135,7 +139,27 @@ sealed trait Stream[+A]{
       go(f(x).reverse, y)
     })
 
+  def startWith[B >: A](xs: Stream[B]): Boolean = {
+    def go(xs: Stream[B], ys: Stream[B]): Boolean = (xs, ys) match {
+      case (Empty, _) => true
+      case (_, Empty) => false
+      case (Cons(h1, t1), Cons(h2, t2)) =>
+        if (h1() == h2())
+          go(t1(), t2())
+        else
+          false
+    }
 
+    go(xs, this)
+  }
+
+  def tails: Stream[Stream[A]] = {
+    def go(xs: Stream[A], ret:Stream[Stream[A]]): Stream[Stream[A]] = xs match {
+      case Empty => Stream.cons(Empty, ret).reverse
+      case Cons(_, t) => go(t(), Stream.cons(xs, ret))
+    }
+    go(this, Empty)
+  }
 }
 
 case object Empty extends Stream[Nothing]
