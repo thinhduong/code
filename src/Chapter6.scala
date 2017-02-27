@@ -138,7 +138,18 @@ case class State[S, +A](run: S => (A, S)) {
     f(b).run(s2)
   })
 
-  def sequence[B >: A](fs: List[State[S, B]]): State[S, List[B]] =
+  def sequence[B >: A](fs: List[State[S, B]]): State[S, List[B]] = State(s1 => {
+
+    def go(xs:  List[State[S, B]], ret: List[B]): State[S, List[B]] = State(s1 => xs match {
+      case Nil => unit[List[B]](ret).run(s1)
+      case h :: t => {
+        val (b, s2) = h.run(s1)
+        go(t, b :: ret).run(s2)
+      }
+    })
+
+    go(fs, Nil: List[B]).run(s1)
+  })
 }
 
 
