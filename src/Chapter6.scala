@@ -119,7 +119,7 @@ case class SimpleRNG(seed: Long) extends RNG {
 }
 
 case class State[S, +A](run: S => (A, S)) {
-  def unit[B >: A](a: B): State[S, B] = State(s => (a, s))
+  def unit[B](a: B): State[S, B] = State(s => (a, s))
 
   def map[B >: A, C](s: State[S, B])(f: B => C): State[S, C] = State(s1 => {
     val (a, s2) = s.run(s1)
@@ -138,7 +138,7 @@ case class State[S, +A](run: S => (A, S)) {
     f(b).run(s2)
   })
 
-  def sequence[B >: A](fs: List[State[S, B]]): State[S, List[B]] = State(s1 => {
+  def sequence[B](fs: List[State[S, B]]): State[S, List[B]] = State(s1 => {
 
     def go(xs:  List[State[S, B]], ret: List[B]): State[S, List[B]] = State(s1 => xs match {
       case Nil => unit[List[B]](ret).run(s1)
@@ -152,8 +152,15 @@ case class State[S, +A](run: S => (A, S)) {
   })
 }
 
-
-class Chapter6 {
-
+object State {
 
 }
+
+sealed trait Input
+
+case object Coin extends Input
+case object Turn extends Input
+
+case class Machine(locked: Boolean, candies: Int, coins: Int)
+
+
