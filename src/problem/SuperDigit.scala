@@ -2,21 +2,22 @@ package problem
 
 object Solution {
   def main(args: Array[String]): Unit = {
-    val inputs = readLine().split(' ').map(_.toInt)
-    val (n, k) = (inputs(0), inputs(1))
+    val inputs = readLine().split(' ')
+    val (n, k) = (inputs(0).toList.map(_.toInt).sum, inputs(1).toInt)
 
-    def sumOfN(n: Int, acc: Int): Int = {
+    def go(n: Long, acc: Long): Long = {
       if (n < 10)
-        acc
+        acc + n
       else
-        sumOfN(n / 10, acc + (n % 10))
+        go(n / 10, acc + (n % 10))
     }
 
-    def go(n: Int, k: Int): Int = {
-      if (n * k < 10) n * k
-      else go(sumOfN(n, 0), 1)
+    def go1(n: Long): Long = {
+      if (n < 10)
+        n
+      else go1(go(n, 0))
     }
 
-    println(go(n, k))
+    println(go1(n * k))
   }
 }
