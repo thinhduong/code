@@ -1,3 +1,7 @@
+package Chapter6
+
+import scala.collection._
+
 trait RNG {
   type Rand[+A] = RNG => (A, RNG)
 
@@ -56,8 +60,8 @@ case class SimpleRNG(seed: Long) extends RNG {
     ((nextDouble1, nextDouble2, nextDouble3), nextRNG3)
   }
 
-  def ints(count: Int)(rng: RNG): (List[Int], RNG) = {
-    def go(i: Int, ret: (List[Int], RNG)): (List[Int], RNG) = {
+  def ints(count: Int)(rng: RNG): (immutable.List[Int], RNG) = {
+    def go(i: Int, ret: (immutable.List[Int], RNG)): (immutable.List[Int], RNG) = {
       if (i >= count)
         ret
       else {
@@ -66,7 +70,7 @@ case class SimpleRNG(seed: Long) extends RNG {
       }
     }
 
-    go(0, (Nil, rng))
+    go(0, (immutable.List[Int](), rng))
   }
 
   def double2: Rand[Double] =
