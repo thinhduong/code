@@ -65,7 +65,7 @@ object SwapNodes {
 
     ks.foreach(k => {
       swap(k, maxDepth, root, nodes)
-      println(traverse(root).map { case SwapNodes.Node(_,v,_,_) => v }.mkString(" "))
+      println(traverse(root).map { case SwapNodes.Node(_,v,_,_) => v + 1 }.mkString(" "))
     })
   }
 }
