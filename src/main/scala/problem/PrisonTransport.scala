@@ -20,7 +20,7 @@ object PrisonTransport {
         math.ceil(sqrtOfX).toInt
       })
 
-    a.foldLeft(0: Int)(_ + _)
+    a.foldLeft(0)(_ + _)
   }
 
   def solve(n: Int, couples: Seq[(Int, Int)]): Int = {
