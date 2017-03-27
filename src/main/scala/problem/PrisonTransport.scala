@@ -8,7 +8,7 @@ object PrisonTransport {
     val pLabel = label(p, xs)
     val qLabel = label(q, xs)
 
-    if (label(p, xs) != label(q, xs))
+    if (pLabel != qLabel)
       xs(qLabel) = pLabel
   }
 
@@ -30,6 +30,8 @@ object PrisonTransport {
     couples.foreach{
       case(p, q) => connect(p, q, ls)
     }
+
+    (0 until  n).foreach(i => ls(i) = label(i, ls))
 
     calculate(ls)
   }

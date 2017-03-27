@@ -9,7 +9,7 @@ import scala.io.Source
 
 @RunWith(classOf[JUnitRunner])
 class PrisonTransportSuite extends FunSuite{
-  /* test("case 1") {
+  test("case 1") {
     val ret = solve(4, List((0, 1), (0, 3)))
 
     assert(ret == 3)
@@ -25,7 +25,7 @@ class PrisonTransportSuite extends FunSuite{
     val ret = solve(8, List((0, 1), (0, 3), (0, 2), (0, 4)))
 
     assert(ret == 6)
-  }    */
+  }
 
   test("case 4") {
     val filename = "prisonTransfer.txt"
@@ -40,5 +40,16 @@ class PrisonTransportSuite extends FunSuite{
     assert(ret == 19160)
   }
 
+  test("case 5") {
+    val filename = "prisonTransfer1.txt"
+    val resource = this.getClass.getClassLoader.getResource(filename)
 
+    val couples = Source.fromFile(resource.toURI).getLines().drop(2).map(l => {
+      val tmp = l.split(' ').map(_.toInt - 1)
+      (tmp(0), tmp(1))
+    }).toSeq
+
+    val ret = solve(8, couples)
+    assert(ret == 6)
+  }
 }
