@@ -1,5 +1,6 @@
 package problem
 
+/* Using Quick Union Find to solve the problem */
 object PrisonTransport {
   def label(p: Int, xs: Array[Int]): Int =
     if (p == xs(p)) p else label(xs(p), xs)
