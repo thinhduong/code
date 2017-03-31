@@ -4,6 +4,7 @@ import java.util.concurrent.{ForkJoinPool, ForkJoinTask, ForkJoinWorkerThread, R
 
 import scala.util.DynamicVariable
 
+/* Divide and Conquer can't solve this problem completely, still timeout inspite of O(nlogn) */
 object JohnAndFences {
   case class Range(from: Int, to: Int)
   val MIN_SIZE = 5
