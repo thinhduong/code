@@ -2,7 +2,7 @@ package dynamic
 
 object RedJohnIsBack {
   def solve(n: Int): Long = {
-    def go(m: Int): Int = {
+    def go(m: Int): Long = {
       if (m == 1)
         0
       else if (m == 2)
@@ -10,10 +10,10 @@ object RedJohnIsBack {
       else if (m == 3)
         2
       else {
-        var c = 2
+        var c = 2L
         for (i <- (5 to m)) {
           var isPrime = true
-          for (j <- (2 to math.sqrt(m).toInt + 1)) {
+          for (j <- (2 to math.sqrt(i).toInt + 1)) {
             if (i % j == 0)
               isPrime = false
           }
