@@ -1,6 +1,6 @@
 package dynamic
 
-import scala.collection.mutable.Queue
+
 
 object Equal {
   def solve(n: Int, xs: Array[Int]): Int = {

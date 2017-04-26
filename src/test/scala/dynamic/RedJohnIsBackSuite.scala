@@ -9,6 +9,6 @@ class RedJohnIsBackSuite extends FunSuite {
 
   test("test 1") {
     val ret = RedJohnIsBack.solve(1)
-    val a= 0
+    assert(ret === 0)
   }
 }
