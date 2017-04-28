@@ -23,6 +23,4 @@ class NikitaAndTheGameSuite extends FunSuite {
 
     assert(ret === 2)
   }
-
-
 }

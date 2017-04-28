@@ -16,16 +16,15 @@ object NikitaAndTheGame {
           if (s(j)(j + i) % 2 == 1)
             p(j)(j + i) = 0
           else {
-            val xs = (0 until i - 1).filter(k => s(j)(k) == s(k+1)(j+i))
+            val xs = (0 until i).filter(k => s(j)(k) == s(k+1)(j+i))
 
             if (xs.isEmpty)
               p(j)(j + i) = 0
             else
-              p(j)(j + i) = xs.map(k => math.min(p(j)(k), p(k+1)(j+i)) + 1).max
+              p(j)(j + i) = xs.map(k => math.max(p(j)(k),  p(k+1)(j+i)) + 1).max
           }
         }
-      }
-    }
+      }                                                                       }
 
     p(0)(n-1)
   }
