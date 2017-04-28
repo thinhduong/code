@@ -22,5 +22,18 @@ class NikitaAndTheGameSuite extends FunSuite {
     val ret = NikitaAndTheGame.solve(4, List(2, 2, 2, 2))
 
     assert(ret === 2)
+
+    /*
+0
+1
+6
+9
+1
+3
+20
+2
+1
+2025
+     */
   }
 }
