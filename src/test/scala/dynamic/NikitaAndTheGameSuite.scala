@@ -20,7 +20,7 @@ class NikitaAndTheGameSuite extends FunSuite {
     assert(ret === 0)
   }
 
-  ignore("test 3") {
+  test("test 3") {
     val ret = NikitaAndTheGame.solve(4, List(2, 2, 2, 2))
 
     assert(ret === 2)
@@ -33,9 +33,9 @@ class NikitaAndTheGameSuite extends FunSuite {
     val lines = Source.fromFile(resource.toURI).getLines().toList
     val t = lines(0).toInt
 
-    val ret = (1 until t).map(ele => {
+    val ret = (1 to t).map(ele => {
       val n = lines(2 * ele - 1).toInt
-      val xs = lines(2 * ele).split(' ').map(_.toInt)
+      val xs = lines(2 * ele).split(' ').map(_.toLong)
       (n, xs)
     }).map { case (n, xs) => NikitaAndTheGame.solve(n, xs) }.
       zip(List(0, 1, 6, 9, 1, 3, 20, 2, 1, 2025))

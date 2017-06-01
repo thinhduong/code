@@ -1,9 +1,9 @@
 package dynamic
 
 object NikitaAndTheGame {
-  def solve(n: Int, xs: Seq[Int]): Int = {
+  def solve(n: Int, xs: Seq[Long]): Long = {
     val s = Array.fill(n, n)(0L)
-    val p = Array.fill(n, n)(0)
+    val p = Array.fill(n, n)(0L)
 
     for (i <- (0 until n))
       s(i)(i) = xs(i)
@@ -17,7 +17,9 @@ object NikitaAndTheGame {
             p(j)(j + i) = 0
           else {
             val half = s(j)(j + i) / 2
-            val idx = (0 until i).indexWhere(k => s(j)(k) == half)
+
+            val idxs = (0 until i).filter(k => s(j)(k) == half).map(k => (k, p(j)(k)))
+            val idx = if (idxs.length > 0) idxs.maxBy(_._2)._1 else -1
 
             if (idx == -1)
               p(j)(j + i) = 0
@@ -35,7 +37,7 @@ object NikitaAndTheGame {
 
     for (i <- (0 until t)) {
       val n = readInt()
-      val xs = readLine().split(' ').map(_.toInt)
+      val xs = readLine().split(' ').map(_.toLong)
       println(solve(n, xs))
     }
   }
